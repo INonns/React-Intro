@@ -1,4 +1,5 @@
-import './TodoItem.css'
+import './TodoItem.css';
+import { DeleteIcon } from '../Icons/Icons-lib/DeleteIcon';
 
 
 function TodoItem(props) {
@@ -9,6 +10,7 @@ function TodoItem(props) {
         <input 
         type="checkbox"
         onClick={props.onComplete}
+        checked={props.completed}
         />
         <span className="checkmark"></span>
       </label>
@@ -16,10 +18,9 @@ function TodoItem(props) {
 
       <span className={`TodoItem-p ${props.completed && "TodoItem-p--completed"}`}>{props.text}</span>
 
-      <span 
-        onClick={props.onDelete}
-        className="TodoItem-delete"
-      >X</span>
+      <DeleteIcon
+        onDelete={props.onDelete}
+      />
     </li>
   );
 }

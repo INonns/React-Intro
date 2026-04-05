@@ -7,16 +7,33 @@ import { TodoList } from './Components/02-Body/TodoList';
 import { TodoItem } from './Components/02-Body/TodoItem';
 import { CreateTodoButton } from './Components/03-Footer/CreateTodoButton';
 
-const defaultTodos = [
-  { text: 'Cortar cebolla', completed: false},
-  { text: 'Llorar viendo la llorona', completed: false},
-  { text: 'LALALALL', completed: false},
-  { text: 'Terminar curso de ReactJS y todas sus variantes consigo mismo', completed: false},
-  { text: 'Usar estados derivados', completed: false}
-]
+import { GraduatedIcon } from './Components/Icons/Icons-lib/GraduatedIcon';
+
+// const defaultTodos = [
+//   { text: 'Cortar cebolla', completed: false},
+//   { text: 'Llorar viendo la llorona', completed: false},
+//   { text: 'LALALALL', completed: false},
+//   { text: 'Terminar curso de ReactJS y todas sus variantes consigo mismo', completed: false},
+//   { text: 'Usar estados derivados', completed: false}
+// ]
+
+// localStorage.setItem('TODOS_V1', JSON.stringify(defaultTodos));
+// localStorage.removeItem('TODOS_V1');
 
 function App() {
-  const [todos, setTodos] = React.useState(defaultTodos); // Contar Todos
+  const localStorageTodos = localStorage.getItem('TODOS_V1');
+
+  let parsedTodos;
+
+  if (!localStorageTodos) {
+    localStorage.setItem('TODOS_V1', JSON.stringify([]));
+    parsedTodos = [];
+  } else {
+    parsedTodos = JSON.parse(localStorageTodos);
+  }
+
+
+  const [todos, setTodos] = React.useState(parsedTodos); // Contar Todos
   const [searchValue, setSearchValue] = React.useState(''); // Buscar Todos
 
   const completedTodos = todos.filter(todo => !!todo.completed).length;
@@ -30,13 +47,18 @@ function App() {
     }
   )
 
+  const saveTodos = (newTodos) => {
+    localStorage.setItem('TODOS_V1', JSON.stringify(newTodos))
+    setTodos(newTodos)
+  }
+
   const completeTodo = (text) => {
     const newTodos = [...todos];
     const todoIndex = newTodos.findIndex(
       (todo) => todo.text === text
     );
     newTodos[todoIndex].completed = !newTodos[todoIndex].completed;
-    setTodos(newTodos) // Actualizar array de todos
+    saveTodos(newTodos) // Actualizar array de todos
   }
 
   const deleteTodo = (text) => {
@@ -45,7 +67,7 @@ function App() {
       (todo) => todo.text === text
     );
     newTodos.splice(todoIndex, 1); // Splice, donde cortar y cuantos cortar
-    setTodos(newTodos) 
+    saveTodos(newTodos) 
   }
 
   console.log("Los usuarios buscan todos de " + searchValue)
@@ -67,8 +89,7 @@ function App() {
         </svg>
 
         <div className="header-content">
-            <span className="header-icon"> 👨‍💻 </span>
-
+            <GraduatedIcon /> 
             <div className="header-text-group">
               <TodoCounter 
                 total={totalTodos} 
