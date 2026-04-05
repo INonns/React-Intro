@@ -6,7 +6,7 @@ function GraduatedIcon() {
         <TodoIcon 
             type="graduated"
             className="header-icon"
-            onClick="none"
+            onClick={null}
         />
     )
 }

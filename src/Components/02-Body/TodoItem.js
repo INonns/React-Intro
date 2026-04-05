@@ -9,7 +9,7 @@ function TodoItem(props) {
       <label className="custom-checkbox">
         <input 
         type="checkbox"
-        onClick={props.onComplete}
+        onChange={props.onComplete}
         checked={props.completed}
         />
         <span className="checkmark"></span>
