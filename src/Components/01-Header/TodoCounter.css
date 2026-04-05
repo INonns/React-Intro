@@ -1,0 +1,10 @@
+/* Archivo TodoCounter.css */
+
+#TodoCounter {
+    font-size: .95rem;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    margin-top: .2rem;
+    color: rgba(0, 0, 0, 0.6);
+    text-align: left;
+}

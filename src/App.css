@@ -1,38 +1,124 @@
-.App {
-  text-align: center;
+/* Seccion sobre la cabecera */
+.header-section {
+  position: relative;
+  width: 100%;
+  height: 15rem;
+  flex-shrink: 0;
+  z-index: 10;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.header-nav {
+  position: absolute;
+  top: 2rem;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  box-sizing: border-box;
+  padding: 0 2rem;
+  z-index: 10;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.nav-btn {
+  background: none;
+  border: none;
+  font-size: 2.4rem;
+  cursor: pointer;
+  color: rgba(0, 0, 0, 0.7);
 }
 
-.App-header {
-  background-color: #233553;
-  min-height: 100vh;
+.header-circle {
+  top: 0;
+  left: 0;
+  height: 12rem;
+  width: 100%;
+  position: absolute;
+  z-index: -1;
+}
+
+.header-content {
+  position: absolute;
+  z-index: 5;
+  bottom: 1rem;
+  left: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.header-icon {
+  font-size: 3.5rem;
+}
+
+.header-text-group {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  gap: 0;
 }
 
-.App-link {
-  color: #97ca3f;
+.header-cat-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2.8rem;
+  margin: 0;
+  padding: 0;
+  line-height: 0.8;
+  font-weight: 700;
+  color: black;
+  letter-spacing: -1px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+/* Seccion sobre el body */
+.body-section {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding-bottom: 6rem;
+}
+
+/* Seccion sobre el footer */
+.footer-section {
+  position: absolute;
+  bottom: 0;  
+  left: 0;
+  width: 100%; 
+  height: 6rem; 
+  background-color: white; 
+  display: flex;
+  justify-content: flex-end; 
+  align-items: center; 
+  padding-right: 2rem; 
+  z-index: 20; 
+}
+
+
+/* Sección sobre contenedor y responsive design*/
+
+.app-wrapper {
+  background: white;
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+@media (min-width: 768px) { /* Solo para pantalla mayores a 768px */
+  body {
+    background-color: #1f2021; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
   }
-  to {
-    transform: rotate(360deg);
+
+  .app-wrapper {
+    width: 375px; /* Ancho estándar de un móvil */
+    height: 812px; /* Alto estándar de un móvil */
+    min-height: auto;
+    border: 12px solid #333; /* El "borde" del celular */
+    border-radius: 40px; /* Bordes redondeados de smartphone */
+    box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+    overflow-y: hidden; /* Para que puedas hacer scroll dentro del "celular" */
+    position: relative;
   }
 }
+
