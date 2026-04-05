@@ -9,20 +9,19 @@ import { CreateTodoButton } from './Components/03-Footer/CreateTodoButton';
 
 const defaultTodos = [
   { text: 'Cortar cebolla', completed: true},
-  { text: 'Llorar viendo la llorona', completed: false},
+  { text: 'Llorar viendo la llorona', completed: true},
   { text: 'LALALALL', completed: false},
-  { text: 'Terminar curso de ReactJS', completed: true},
-  { text: 'LELELEL', completed: true},
-  { text: 'Ver una peli', completed: true},
-  { text: 'Terminar una serie', completed: true},
-  { text: 'Escribir', completed: true},
-  { text: 'Dibujar', completed: true},
-  { text: 'Terminar página web', completed: true},
-  { text: 'Escuchar música', completed: true},
-  { text: 'Escribir un poema', completed: true},
+  { text: 'Terminar curso de ReactJS', completed: false},
+  { text: 'Usar estados derivados', completed: true}
 ]
 
 function App() {
+  const [todos, setTodos] = React.useState(defaultTodos);
+  const [searchValue, setSearchValue] = React.useState('');
+
+  const completedTodos = todos.filter(todo => !!todo.completed).length;
+  const totalTodos = todos.length;
+
   return (
     <div className="app-wrapper">
 
@@ -42,14 +41,16 @@ function App() {
             <span className="header-icon"> 👨‍💻 </span>
 
             <div className="header-text-group">
-              <TodoCounter total={5} completed={3}/>
+              <TodoCounter 
+                total={totalTodos} 
+                completed={completedTodos}
+              />
               <h1 className="header-cat-title"> Personal </h1>
             </div>
 
         </div>
 
       </div>
-
 
 
       <div className="body-section">
@@ -66,33 +67,16 @@ function App() {
       </div>
 
 
-
       <div className="footer-section">
         {/* Seccion final donde ira el boton para agregar */}
 
-        <TodoSearch />
+        <TodoSearch 
+        searchValue={searchValue}
+        setSearchValue={setSearchValue}/>
 
         <CreateTodoButton/>
       </div>
 
-
-
-
-
-      {/* <TodoCounter completed={16} total={25} />
-
-
-      <TodoList>
-        {defaultTodos.map(todo => (
-          <TodoItem 
-            key={todo.text} 
-            text={todo.text} 
-            completed={todo.completed}
-          />
-        ))}
-      </TodoList>
-
-       */}
     </div>
   );
 }

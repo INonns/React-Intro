@@ -1,9 +1,7 @@
 import React from "react";
 import "./TodoSearch.css"
 
-function TodoSearch() {
-  const [searchValue, setSearchValue] = React.useState('')
-
+function TodoSearch({searchValue, setSearchValue}) {
   return (
     <input 
     id="TodoSearch" 
@@ -11,7 +9,6 @@ function TodoSearch() {
     value = {searchValue}
     onChange={(event) => {
       setSearchValue(event.target.value);
-      console.log("Los usuarios buscan tareas de: " + searchValue)
     }} />
   );
 }
