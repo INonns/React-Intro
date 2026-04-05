@@ -8,22 +8,51 @@ import { TodoItem } from './Components/02-Body/TodoItem';
 import { CreateTodoButton } from './Components/03-Footer/CreateTodoButton';
 
 const defaultTodos = [
-  { text: 'Cortar cebolla', completed: true},
-  { text: 'Llorar viendo la llorona', completed: true},
+  { text: 'Cortar cebolla', completed: false},
+  { text: 'Llorar viendo la llorona', completed: false},
   { text: 'LALALALL', completed: false},
-  { text: 'Terminar curso de ReactJS', completed: false},
-  { text: 'Usar estados derivados', completed: true}
+  { text: 'Terminar curso de ReactJS y todas sus variantes consigo mismo', completed: false},
+  { text: 'Usar estados derivados', completed: false}
 ]
 
 function App() {
-  const [todos, setTodos] = React.useState(defaultTodos);
-  const [searchValue, setSearchValue] = React.useState('');
+  const [todos, setTodos] = React.useState(defaultTodos); // Contar Todos
+  const [searchValue, setSearchValue] = React.useState(''); // Buscar Todos
 
   const completedTodos = todos.filter(todo => !!todo.completed).length;
   const totalTodos = todos.length;
 
+  const searchedTodos = todos.filter(
+    (todo) => {
+      const todoText = todo.text.toLowerCase();
+      const searchText = searchValue.toLowerCase();
+      return todoText.includes(searchText);
+    }
+  )
+
+  const completeTodo = (text) => {
+    const newTodos = [...todos];
+    const todoIndex = newTodos.findIndex(
+      (todo) => todo.text === text
+    );
+    newTodos[todoIndex].completed = !newTodos[todoIndex].completed;
+    setTodos(newTodos) // Actualizar array de todos
+  }
+
+  const deleteTodo = (text) => {
+    const newTodos = [...todos];
+    const todoIndex = newTodos.findIndex(
+      (todo) => todo.text === text
+    );
+    newTodos.splice(todoIndex, 1); // Splice, donde cortar y cuantos cortar
+    setTodos(newTodos) 
+  }
+
+  console.log("Los usuarios buscan todos de " + searchValue)
+
   return (
     <div className="app-wrapper">
+
 
       <div className="header-section">
         {/* Seccion donde ira la cabecera */}
@@ -56,11 +85,13 @@ function App() {
       <div className="body-section">
         {/* Seccion principal, donde iran las tareas*/}
           <TodoList>
-            {defaultTodos.map(todo => (
+            {searchedTodos.map(todo => (
               <TodoItem 
                 key={todo.text} 
                 text={todo.text} 
                 completed={todo.completed}
+                onComplete={() => completeTodo(todo.text)}
+                onDelete={() => deleteTodo(todo.text)}
               />
             ))}
           </TodoList>
