@@ -9,8 +9,8 @@ import { CreateTodoButton } from './Components/03-Footer/CreateTodoButton';
 
 const defaultTodos = [
   { text: 'Cortar cebolla', completed: true},
-  { text: 'Llorar viendo la llorona', completed: true},
-  { text: 'LALALALL', completed: true},
+  { text: 'Llorar viendo la llorona', completed: false},
+  { text: 'LALALALL', completed: false},
   { text: 'Terminar curso de ReactJS', completed: true},
   { text: 'LELELEL', completed: true},
   { text: 'Ver una peli', completed: true},
@@ -70,6 +70,8 @@ function App() {
       <div className="footer-section">
         {/* Seccion final donde ira el boton para agregar */}
 
+        <TodoSearch />
+
         <CreateTodoButton/>
       </div>
 
@@ -78,7 +80,7 @@ function App() {
 
 
       {/* <TodoCounter completed={16} total={25} />
-      <TodoSearch />
+
 
       <TodoList>
         {defaultTodos.map(todo => (

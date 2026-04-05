@@ -4,10 +4,14 @@ import './TodoItem.css'
 function TodoItem(props) {
   return (
     <li className="TodoItem">
-      {/* <span>V {props.completed} </span> */}
-      <input type="checkbox"></input>
-      <p>{props.text}</p>
-      {/* <span>X</span> */}
+
+      <label className="custom-checkbox">
+        <input type="checkbox"></input>
+        <span className="checkmark"></span>
+      </label>
+
+
+      <p className={`TodoItem-p ${props.completed && "TodoItem-p--completed"}`}>{props.text}</p>
     </li>
   );
 }
