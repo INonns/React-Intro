@@ -4,9 +4,15 @@ import { TodoList } from '../components/02-Body/TodoList/index';
 import { TodoItem } from '../components/02-Body/TodoItem/index';
 import { CreateTodoButton } from '../components/03-Footer/CreateTodoButton/index';
 
+import { TodosLoading } from '../components/InitialScreen/TodosLoading';
+import { TodosError } from '../components/InitialScreen/TodosError';
+import { EmptyTodos } from '../components/InitialScreen/EmptyTodos';
+
 import { GraduatedIcon } from '../components/Icons/Icons-lib/GraduatedIcon';
 
 function AppUI({
+    loading,
+    error,
     totalTodos,
     completedTodos,
     searchedTodos,
@@ -46,17 +52,23 @@ function AppUI({
     
         <div className="body-section">
             {/* Seccion principal, donde iran las tareas*/}
-            <TodoList>
-                {searchedTodos.map(todo => (
-                <TodoItem 
-                    key={todo.text} 
-                    text={todo.text} 
-                    completed={todo.completed}
-                    onComplete={() => completeTodo(todo.text)}
-                    onDelete={() => deleteTodo(todo.text)}
-                />
-                ))}
-            </TodoList>
+            {loading && <TodosLoading/>}
+            {error && <TodosError/>}
+            {(!loading && searchedTodos.length === 0) && <EmptyTodos/>}
+
+            {!loading && (
+                <TodoList>
+                    {searchedTodos.map(todo => (
+                    <TodoItem 
+                        key={todo.text} 
+                        text={todo.text} 
+                        completed={todo.completed}
+                        onComplete={() => completeTodo(todo.text)}
+                        onDelete={() => deleteTodo(todo.text)}
+                    />
+                    ))}
+                </TodoList>
+            )}
         </div>
     
     

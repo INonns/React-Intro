@@ -17,7 +17,14 @@ import { AppUI } from './AppUI';
 // localStorage.removeItem('TODOS_V1');
 
 function App() {
-  const [todos, saveTodos] = useLocalStorage('TODOS_V1', [] ); // Contar Todos
+
+  const { // Lo que devuelve el custom hook
+    item: todos, 
+    saveItem: saveTodos,
+    loading,
+    error
+  } = useLocalStorage('TODOS_V1', [] ); // Parametros del custom hook
+
   const [searchValue, setSearchValue] = React.useState(''); // Buscar Todos
 
   const completedTodos = todos.filter(todo => !!todo.completed).length;
@@ -50,7 +57,9 @@ function App() {
   }
 
   return (
-    <AppUI 
+    <AppUI
+      loading={loading}
+      error={error} 
       totalTodos={totalTodos}
       completedTodos={completedTodos}
       searchedTodos={searchedTodos}

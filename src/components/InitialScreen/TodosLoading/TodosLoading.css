@@ -1,0 +1,39 @@
+.LoadingTodo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px; 
+  height: 100px;
+  margin: auto;
+}
+
+.LoadingTodo-dot {
+  width: 20px;
+  height: 20px;
+  background-color: #20d9b6; 
+  border-radius: 50%;
+  /* Nombre de la animación | Duración | Modo (infinito) | Suavizado */
+  animation: bounceDot 0.6s infinite alternate;
+}
+
+/* Retraso para que no caigan todas al tiempo */
+.LoadingTodo-dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.LoadingTodo-dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+
+@keyframes bounceDot {
+  from {
+    transform: translateY(0);
+    opacity: 0.4;
+  }
+  to {
+    transform: translateY(-20px); 
+    opacity: 1;
+    box-shadow: 0 5px 15px rgba(32, 217, 182, 0.3);
+  }
+}

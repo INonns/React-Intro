@@ -81,6 +81,7 @@ body {
   flex-grow: 1;
   overflow-y: auto;
   padding-bottom: 6rem;
+  max-height: 23rem;
 }
 
 /* Seccion sobre el footer */
